@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "event")
@@ -13,6 +11,9 @@ public class Event {
     @Id
     @Column(name = "uuid", nullable = false, length = 36)
     private String uuid;
+
+    @Column(name = "secure_id", length = 8)
+    private String secureId;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -41,21 +42,20 @@ public class Event {
     @Column(name = "updated_at")
     private Instant updatedAt;
 
-    @OneToMany(mappedBy = "eventUuid")
-    private Set<com.flowalp.event.entity.Activity> activities = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "eventUuid")
-    private Set<com.flowalp.event.entity.Configuration> configurations = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "eventUuid")
-    private Set<com.flowalp.event.entity.EventUserFieldAssociation> eventUserFieldAssociations = new LinkedHashSet<>();
-
     public String getUuid() {
         return uuid;
     }
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    public String getSecureId() {
+        return secureId;
+    }
+
+    public void setSecureId(String secureId) {
+        this.secureId = secureId;
     }
 
     public String getName() {
@@ -120,30 +120,6 @@ public class Event {
 
     public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public Set<com.flowalp.event.entity.Activity> getActivities() {
-        return activities;
-    }
-
-    public void setActivities(Set<com.flowalp.event.entity.Activity> activities) {
-        this.activities = activities;
-    }
-
-    public Set<com.flowalp.event.entity.Configuration> getConfigurations() {
-        return configurations;
-    }
-
-    public void setConfigurations(Set<com.flowalp.event.entity.Configuration> configurations) {
-        this.configurations = configurations;
-    }
-
-    public Set<com.flowalp.event.entity.EventUserFieldAssociation> getEventUserFieldAssociations() {
-        return eventUserFieldAssociations;
-    }
-
-    public void setEventUserFieldAssociations(Set<com.flowalp.event.entity.EventUserFieldAssociation> eventUserFieldAssociations) {
-        this.eventUserFieldAssociations = eventUserFieldAssociations;
     }
 
 }

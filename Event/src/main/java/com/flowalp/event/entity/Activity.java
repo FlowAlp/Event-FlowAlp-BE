@@ -5,8 +5,6 @@ import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "activity")
@@ -15,9 +13,12 @@ public class Activity {
     @Column(name = "uuid", nullable = false, length = 36)
     private String uuid;
 
+    @Column(name = "secure_id", length = 8)
+    private String secureId;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "event_uuid", nullable = false)
-    private com.flowalp.event.entity.Event eventUuid;
+    private Event eventUuid;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -47,15 +48,6 @@ public class Activity {
     @Column(name = "updated_at")
     private Instant updatedAt;
 
-    @OneToMany(mappedBy = "activityUuid")
-    private Set<com.flowalp.event.entity.Assignment> assignments = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "activityUuid")
-    private Set<com.flowalp.event.entity.ManagerActivityUserAssociation> managerActivityUserAssociations = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "activityUuid")
-    private Set<com.flowalp.event.entity.TagActivityAssociation> tagActivityAssociations = new LinkedHashSet<>();
-
     public String getUuid() {
         return uuid;
     }
@@ -64,11 +56,19 @@ public class Activity {
         this.uuid = uuid;
     }
 
-    public com.flowalp.event.entity.Event getEventUuid() {
+    public String getSecureId() {
+        return secureId;
+    }
+
+    public void setSecureId(String secureId) {
+        this.secureId = secureId;
+    }
+
+    public Event getEventUuid() {
         return eventUuid;
     }
 
-    public void setEventUuid(com.flowalp.event.entity.Event eventUuid) {
+    public void setEventUuid(Event eventUuid) {
         this.eventUuid = eventUuid;
     }
 
@@ -134,30 +134,6 @@ public class Activity {
 
     public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public Set<com.flowalp.event.entity.Assignment> getAssignments() {
-        return assignments;
-    }
-
-    public void setAssignments(Set<com.flowalp.event.entity.Assignment> assignments) {
-        this.assignments = assignments;
-    }
-
-    public Set<com.flowalp.event.entity.ManagerActivityUserAssociation> getManagerActivityUserAssociations() {
-        return managerActivityUserAssociations;
-    }
-
-    public void setManagerActivityUserAssociations(Set<com.flowalp.event.entity.ManagerActivityUserAssociation> managerActivityUserAssociations) {
-        this.managerActivityUserAssociations = managerActivityUserAssociations;
-    }
-
-    public Set<com.flowalp.event.entity.TagActivityAssociation> getTagActivityAssociations() {
-        return tagActivityAssociations;
-    }
-
-    public void setTagActivityAssociations(Set<com.flowalp.event.entity.TagActivityAssociation> tagActivityAssociations) {
-        this.tagActivityAssociations = tagActivityAssociations;
     }
 
 }

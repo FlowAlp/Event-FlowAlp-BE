@@ -11,7 +11,7 @@ public class Configuration {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "event_uuid", nullable = false)
-    private com.flowalp.event.entity.Event eventUuid;
+    private Event eventUuid;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -28,11 +28,11 @@ public class Configuration {
         this.uuid = uuid;
     }
 
-    public com.flowalp.event.entity.Event getEventUuid() {
+    public Event getEventUuid() {
         return eventUuid;
     }
 
-    public void setEventUuid(com.flowalp.event.entity.Event eventUuid) {
+    public void setEventUuid(Event eventUuid) {
         this.eventUuid = eventUuid;
     }
 

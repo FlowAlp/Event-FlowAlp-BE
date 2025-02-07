@@ -5,8 +5,6 @@ import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
 import java.time.LocalTime;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "assignment")
@@ -15,9 +13,12 @@ public class Assignment {
     @Column(name = "uuid", nullable = false, length = 36)
     private String uuid;
 
+    @Column(name = "secure_id", length = 8)
+    private String secureId;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "activity_uuid", nullable = false)
-    private com.flowalp.event.entity.Activity activityUuid;
+    private Activity activityUuid;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -52,12 +53,6 @@ public class Assignment {
     @Column(name = "updated_at")
     private Instant updatedAt;
 
-    @OneToMany(mappedBy = "assignmentUuid")
-    private Set<com.flowalp.event.entity.AssignmentUserAssociation> assignmentUserAssociations = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "assignmentUuid")
-    private Set<com.flowalp.event.entity.TagAssignmentAssociation> tagAssignmentAssociations = new LinkedHashSet<>();
-
     public String getUuid() {
         return uuid;
     }
@@ -66,11 +61,19 @@ public class Assignment {
         this.uuid = uuid;
     }
 
-    public com.flowalp.event.entity.Activity getActivityUuid() {
+    public String getSecureId() {
+        return secureId;
+    }
+
+    public void setSecureId(String secureId) {
+        this.secureId = secureId;
+    }
+
+    public Activity getActivityUuid() {
         return activityUuid;
     }
 
-    public void setActivityUuid(com.flowalp.event.entity.Activity activityUuid) {
+    public void setActivityUuid(Activity activityUuid) {
         this.activityUuid = activityUuid;
     }
 
@@ -144,22 +147,6 @@ public class Assignment {
 
     public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public Set<com.flowalp.event.entity.AssignmentUserAssociation> getAssignmentUserAssociations() {
-        return assignmentUserAssociations;
-    }
-
-    public void setAssignmentUserAssociations(Set<com.flowalp.event.entity.AssignmentUserAssociation> assignmentUserAssociations) {
-        this.assignmentUserAssociations = assignmentUserAssociations;
-    }
-
-    public Set<com.flowalp.event.entity.TagAssignmentAssociation> getTagAssignmentAssociations() {
-        return tagAssignmentAssociations;
-    }
-
-    public void setTagAssignmentAssociations(Set<com.flowalp.event.entity.TagAssignmentAssociation> tagAssignmentAssociations) {
-        this.tagAssignmentAssociations = tagAssignmentAssociations;
     }
 
 }

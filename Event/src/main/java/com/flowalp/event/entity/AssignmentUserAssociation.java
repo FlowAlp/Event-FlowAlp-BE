@@ -12,13 +12,16 @@ public class AssignmentUserAssociation {
     @Column(name = "uuid", nullable = false, length = 36)
     private String uuid;
 
+    @Column(name = "secure_id", length = 8)
+    private String secureId;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "assignment_uuid", nullable = false)
-    private com.flowalp.event.entity.Assignment assignmentUuid;
+    private Assignment assignmentUuid;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_uuid", nullable = false)
-    private com.flowalp.event.entity.User userUuid;
+    private User userUuid;
 
     @Lob
     @Column(name = "comment")
@@ -44,19 +47,27 @@ public class AssignmentUserAssociation {
         this.uuid = uuid;
     }
 
-    public com.flowalp.event.entity.Assignment getAssignmentUuid() {
+    public String getSecureId() {
+        return secureId;
+    }
+
+    public void setSecureId(String secureId) {
+        this.secureId = secureId;
+    }
+
+    public Assignment getAssignmentUuid() {
         return assignmentUuid;
     }
 
-    public void setAssignmentUuid(com.flowalp.event.entity.Assignment assignmentUuid) {
+    public void setAssignmentUuid(Assignment assignmentUuid) {
         this.assignmentUuid = assignmentUuid;
     }
 
-    public com.flowalp.event.entity.User getUserUuid() {
+    public User getUserUuid() {
         return userUuid;
     }
 
-    public void setUserUuid(com.flowalp.event.entity.User userUuid) {
+    public void setUserUuid(User userUuid) {
         this.userUuid = userUuid;
     }
 

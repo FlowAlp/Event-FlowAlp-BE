@@ -11,11 +11,11 @@ public class TagAssignmentAssociation {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tag_uuid", nullable = false)
-    private com.flowalp.event.entity.Tag tagUuid;
+    private Tag tagUuid;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "assignment_uuid", nullable = false)
-    private com.flowalp.event.entity.Assignment assignmentUuid;
+    private Assignment assignmentUuid;
 
     public String getUuid() {
         return uuid;
@@ -25,19 +25,19 @@ public class TagAssignmentAssociation {
         this.uuid = uuid;
     }
 
-    public com.flowalp.event.entity.Tag getTagUuid() {
+    public Tag getTagUuid() {
         return tagUuid;
     }
 
-    public void setTagUuid(com.flowalp.event.entity.Tag tagUuid) {
+    public void setTagUuid(Tag tagUuid) {
         this.tagUuid = tagUuid;
     }
 
-    public com.flowalp.event.entity.Assignment getAssignmentUuid() {
+    public Assignment getAssignmentUuid() {
         return assignmentUuid;
     }
 
-    public void setAssignmentUuid(com.flowalp.event.entity.Assignment assignmentUuid) {
+    public void setAssignmentUuid(Assignment assignmentUuid) {
         this.assignmentUuid = assignmentUuid;
     }
 

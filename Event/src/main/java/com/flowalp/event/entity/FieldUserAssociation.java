@@ -11,11 +11,11 @@ public class FieldUserAssociation {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_uuid", nullable = false)
-    private com.flowalp.event.entity.User userUuid;
+    private User userUuid;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "field_uuid", nullable = false)
-    private com.flowalp.event.entity.UserField fieldUuid;
+    private UserField fieldUuid;
 
     @Lob
     @Column(name = "value", nullable = false)
@@ -29,19 +29,19 @@ public class FieldUserAssociation {
         this.uuid = uuid;
     }
 
-    public com.flowalp.event.entity.User getUserUuid() {
+    public User getUserUuid() {
         return userUuid;
     }
 
-    public void setUserUuid(com.flowalp.event.entity.User userUuid) {
+    public void setUserUuid(User userUuid) {
         this.userUuid = userUuid;
     }
 
-    public com.flowalp.event.entity.UserField getFieldUuid() {
+    public UserField getFieldUuid() {
         return fieldUuid;
     }
 
-    public void setFieldUuid(com.flowalp.event.entity.UserField fieldUuid) {
+    public void setFieldUuid(UserField fieldUuid) {
         this.fieldUuid = fieldUuid;
     }
 

@@ -12,11 +12,11 @@ public class EventUserFieldAssociation {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "event_uuid", nullable = false)
-    private com.flowalp.event.entity.Event eventUuid;
+    private Event eventUuid;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "field_uuid", nullable = false)
-    private com.flowalp.event.entity.UserField fieldUuid;
+    private UserField fieldUuid;
 
     @ColumnDefault("0")
     @Column(name = "required")
@@ -30,19 +30,19 @@ public class EventUserFieldAssociation {
         this.uuid = uuid;
     }
 
-    public com.flowalp.event.entity.Event getEventUuid() {
+    public Event getEventUuid() {
         return eventUuid;
     }
 
-    public void setEventUuid(com.flowalp.event.entity.Event eventUuid) {
+    public void setEventUuid(Event eventUuid) {
         this.eventUuid = eventUuid;
     }
 
-    public com.flowalp.event.entity.UserField getFieldUuid() {
+    public UserField getFieldUuid() {
         return fieldUuid;
     }
 
-    public void setFieldUuid(com.flowalp.event.entity.UserField fieldUuid) {
+    public void setFieldUuid(UserField fieldUuid) {
         this.fieldUuid = fieldUuid;
     }
 

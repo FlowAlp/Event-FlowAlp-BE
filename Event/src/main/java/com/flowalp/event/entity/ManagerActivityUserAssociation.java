@@ -11,7 +11,7 @@ public class ManagerActivityUserAssociation {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "activity_uuid", nullable = false)
-    private com.flowalp.event.entity.Activity activityUuid;
+    private Activity activityUuid;
 
     @Column(name = "user_uuid", nullable = false, length = 36)
     private String userUuid;
@@ -24,11 +24,11 @@ public class ManagerActivityUserAssociation {
         this.uuid = uuid;
     }
 
-    public com.flowalp.event.entity.Activity getActivityUuid() {
+    public Activity getActivityUuid() {
         return activityUuid;
     }
 
-    public void setActivityUuid(com.flowalp.event.entity.Activity activityUuid) {
+    public void setActivityUuid(Activity activityUuid) {
         this.activityUuid = activityUuid;
     }
 
