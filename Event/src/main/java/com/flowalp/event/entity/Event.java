@@ -6,13 +6,13 @@ import org.hibernate.annotations.ColumnDefault;
 import java.time.Instant;
 
 @Entity
-@Table(name = "event")
+@Table(name = "event", schema = "event_flowalp")
 public class Event {
     @Id
-    @Column(name = "uuid", nullable = false, length = 36)
+    @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)")
     private String uuid;
 
-    @Column(name = "secure_id", length = 8)
+    @Column(name = "secure_id", columnDefinition = "CHAR(8)")
     private String secureId;
 
     @Column(name = "name", nullable = false)

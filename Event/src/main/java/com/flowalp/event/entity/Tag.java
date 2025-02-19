@@ -3,10 +3,10 @@ package com.flowalp.event.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "tag")
+@Table(name = "tag", schema = "event_flowalp")
 public class Tag {
     @Id
-    @Column(name = "uuid", nullable = false, length = 36)
+    @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)")
     private String uuid;
 
     @Column(name = "name", nullable = false)

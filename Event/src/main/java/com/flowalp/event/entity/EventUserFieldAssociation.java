@@ -4,10 +4,10 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 
 @Entity
-@Table(name = "event_user_field_association")
+@Table(name = "event_user_field_association", schema = "event_flowalp")
 public class EventUserFieldAssociation {
     @Id
-    @Column(name = "uuid", nullable = false, length = 36)
+    @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)")
     private String uuid;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

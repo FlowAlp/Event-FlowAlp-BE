@@ -9,14 +9,13 @@ spring:
   application:
     name: event
   datasource:
-    url: jdbc:mysql://localhost:3306/event_flowalp?useSSL=false&
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
+    url: jdbc:mysql://localhost:3306/event_flowalp?useSSL=false&allowPublicKeyRetrieval=true
+    username: nuovo_utente
+    password: tua_password
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: update  # "update" for dev, "validate" for prod
+      ddl-auto: validate  # "update" for dev, "validate" for prod
 
 
 ---

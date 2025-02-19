@@ -7,13 +7,13 @@ import java.time.Instant;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "activity")
+@Table(name = "activity", schema = "event_flowalp")
 public class Activity {
     @Id
-    @Column(name = "uuid", nullable = false, length = 36)
+    @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)")
     private String uuid;
 
-    @Column(name = "secure_id", length = 8)
+    @Column(name = "secure_id", columnDefinition = "CHAR(8)")
     private String secureId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

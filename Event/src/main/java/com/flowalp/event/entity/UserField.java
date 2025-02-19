@@ -6,10 +6,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "user_fields")
+@Table(name = "user_fields", schema = "event_flowalp")
 public class UserField {
     @Id
-    @Column(name = "uuid", nullable = false, length = 36)
+    @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)")
     private String uuid;
 
     @Column(name = "name", nullable = false)

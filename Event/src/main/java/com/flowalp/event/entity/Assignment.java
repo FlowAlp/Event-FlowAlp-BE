@@ -1,5 +1,6 @@
 package com.flowalp.event.entity;
 
+import com.flowalp.event.entity.enums.AssigmentPeriod;
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -7,13 +8,13 @@ import java.time.Instant;
 import java.time.LocalTime;
 
 @Entity
-@Table(name = "assignment")
+@Table(name = "assignment", schema = "event_flowalp")
 public class Assignment {
     @Id
-    @Column(name = "uuid", nullable = false, length = 36)
+    @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)")
     private String uuid;
 
-    @Column(name = "secure_id", length = 8)
+    @Column(name = "secure_id", columnDefinition = "CHAR(8)")
     private String secureId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -43,7 +44,7 @@ public class Assignment {
     @ColumnDefault("'NULL'")
     @Lob
     @Column(name = "assignment_period")
-    private String assignmentPeriod;
+    private AssigmentPeriod assignmentPeriod;
 
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "created_at")
@@ -125,11 +126,11 @@ public class Assignment {
         this.overnight = overnight;
     }
 
-    public String getAssignmentPeriod() {
+    public AssigmentPeriod getAssignmentPeriod() {
         return assignmentPeriod;
     }
 
-    public void setAssignmentPeriod(String assignmentPeriod) {
+    public void setAssignmentPeriod(AssigmentPeriod assignmentPeriod) {
         this.assignmentPeriod = assignmentPeriod;
     }
 

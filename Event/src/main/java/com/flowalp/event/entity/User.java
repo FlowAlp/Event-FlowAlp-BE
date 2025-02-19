@@ -1,18 +1,19 @@
 package com.flowalp.event.entity;
 
+import com.flowalp.event.entity.enums.UserRole;
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user", schema = "event_flowalp")
 public class User {
     @Id
-    @Column(name = "uuid", nullable = false, length = 36)
+    @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)")
     private String uuid;
 
-    @Column(name = "secure_id", length = 8)
+    @Column(name = "secure_id", columnDefinition = "CHAR(8)")
     private String secureId;
 
     @Column(name = "name", nullable = false)
@@ -27,7 +28,7 @@ public class User {
     @ColumnDefault("'user'")
     @Lob
     @Column(name = "role", nullable = false)
-    private String role;
+    private UserRole role;
 
     @Column(name = "parent_uuid", length = 36)
     private String parentUuid;
@@ -72,11 +73,11 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    public String getRole() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 

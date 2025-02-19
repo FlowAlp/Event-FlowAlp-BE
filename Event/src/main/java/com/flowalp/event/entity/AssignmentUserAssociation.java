@@ -6,11 +6,12 @@ import org.hibernate.annotations.ColumnDefault;
 import java.time.Instant;
 
 @Entity
-@Table(name = "assignment_user_association")
+@Table(name = "assignment_user_association", schema = "event_flowalp")
 public class AssignmentUserAssociation {
     @Id
-    @Column(name = "uuid", nullable = false, length = 36)
+    @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)")
     private String uuid;
+
 
     @Column(name = "secure_id", length = 8)
     private String secureId;
