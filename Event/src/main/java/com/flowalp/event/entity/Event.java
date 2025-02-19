@@ -9,6 +9,7 @@ import java.time.Instant;
 @Table(name = "event", schema = "event_flowalp")
 public class Event {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)")
     private String uuid;
 
@@ -18,7 +19,6 @@ public class Event {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Lob
     @Column(name = "description", nullable = false)
     private String description;
 

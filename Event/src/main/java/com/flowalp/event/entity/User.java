@@ -2,7 +2,6 @@ package com.flowalp.event.entity;
 
 import com.flowalp.event.entity.enums.UserRole;
 import jakarta.persistence.*;
-import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDate;
 
@@ -10,6 +9,7 @@ import java.time.LocalDate;
 @Table(name = "user", schema = "event_flowalp")
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)")
     private String uuid;
 
@@ -25,12 +25,10 @@ public class User {
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
 
-    @ColumnDefault("'user'")
-    @Lob
     @Column(name = "role", nullable = false)
     private UserRole role;
 
-    @Column(name = "parent_uuid", length = 36)
+    @Column(name = "parent_uuid", columnDefinition = "CHAR(36)")
     private String parentUuid;
 
     public String getUuid() {

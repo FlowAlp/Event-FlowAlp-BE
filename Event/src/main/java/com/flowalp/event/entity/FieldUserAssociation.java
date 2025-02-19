@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "field_user_association", schema = "event_flowalp")
 public class FieldUserAssociation {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)")
     private String uuid;
 
@@ -17,7 +18,6 @@ public class FieldUserAssociation {
     @JoinColumn(name = "field_uuid", nullable = false)
     private UserField fieldUuid;
 
-    @Lob
     @Column(name = "value", nullable = false)
     private String value;
 

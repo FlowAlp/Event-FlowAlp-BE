@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "configuration", schema = "event_flowalp")
 public class Configuration {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)")
     private String uuid;
 
@@ -16,7 +17,6 @@ public class Configuration {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Lob
     @Column(name = "value", nullable = false)
     private String value;
 

@@ -8,6 +8,7 @@ spring:
       on-profile: dev
   application:
     name: event
+    version: 0.0.1
   datasource:
     url: jdbc:mysql://localhost:3306/event_flowalp?useSSL=false&allowPublicKeyRetrieval=true
     username: nuovo_utente
@@ -16,8 +17,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate  # "update" for dev, "validate" for prod
-
-
+server:
+  port: 3000
 ---
 spring:
   config:

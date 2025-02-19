@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "tag_assignment_association", schema = "event_flowalp")
 public class TagAssignmentAssociation {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)")
     private String uuid;
 

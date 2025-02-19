@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @Table(name = "activity", schema = "event_flowalp")
 public class Activity {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)")
     private String uuid;
 
@@ -23,7 +24,6 @@ public class Activity {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Lob
     @Column(name = "description", nullable = false)
     private String description;
 
@@ -36,7 +36,6 @@ public class Activity {
     @Column(name = "end_date")
     private LocalDate endDate;
 
-    @ColumnDefault("0")
     @Column(name = "adults_only")
     private Boolean adultsOnly;
 

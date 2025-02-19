@@ -4,12 +4,9 @@ import com.flowalp.event.dto.EventDTO;
 import com.flowalp.event.entity.Event;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
 public interface EventMapper {
-
-    EventMapper INSTANCE = Mappers.getMapper(EventMapper.class);
 
     @Mapping(target = "uuid", ignore = true)
     @Mapping(source = "secureId", target = "secureId")
