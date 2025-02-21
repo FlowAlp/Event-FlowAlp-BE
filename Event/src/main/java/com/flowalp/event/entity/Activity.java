@@ -5,24 +5,25 @@ import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Entity
-@Table(name = "activity")
+@Table(name = "activity", schema = "event_flowalp")
 public class Activity {
     @Id
-    @Column(name = "uuid", nullable = false, length = 36)
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)")
     private String uuid;
+
+    @Column(name = "secure_id", columnDefinition = "CHAR(8)")
+    private String secureId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "event_uuid", nullable = false)
-    private com.flowalp.event.entity.Event eventUuid;
+    private Event eventUuid;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Lob
     @Column(name = "description", nullable = false)
     private String description;
 
@@ -35,7 +36,6 @@ public class Activity {
     @Column(name = "end_date")
     private LocalDate endDate;
 
-    @ColumnDefault("0")
     @Column(name = "adults_only")
     private Boolean adultsOnly;
 
@@ -47,15 +47,6 @@ public class Activity {
     @Column(name = "updated_at")
     private Instant updatedAt;
 
-    @OneToMany(mappedBy = "activityUuid")
-    private Set<com.flowalp.event.entity.Assignment> assignments = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "activityUuid")
-    private Set<com.flowalp.event.entity.ManagerActivityUserAssociation> managerActivityUserAssociations = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "activityUuid")
-    private Set<com.flowalp.event.entity.TagActivityAssociation> tagActivityAssociations = new LinkedHashSet<>();
-
     public String getUuid() {
         return uuid;
     }
@@ -64,11 +55,19 @@ public class Activity {
         this.uuid = uuid;
     }
 
-    public com.flowalp.event.entity.Event getEventUuid() {
+    public String getSecureId() {
+        return secureId;
+    }
+
+    public void setSecureId(String secureId) {
+        this.secureId = secureId;
+    }
+
+    public Event getEventUuid() {
         return eventUuid;
     }
 
-    public void setEventUuid(com.flowalp.event.entity.Event eventUuid) {
+    public void setEventUuid(Event eventUuid) {
         this.eventUuid = eventUuid;
     }
 
@@ -134,30 +133,6 @@ public class Activity {
 
     public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public Set<com.flowalp.event.entity.Assignment> getAssignments() {
-        return assignments;
-    }
-
-    public void setAssignments(Set<com.flowalp.event.entity.Assignment> assignments) {
-        this.assignments = assignments;
-    }
-
-    public Set<com.flowalp.event.entity.ManagerActivityUserAssociation> getManagerActivityUserAssociations() {
-        return managerActivityUserAssociations;
-    }
-
-    public void setManagerActivityUserAssociations(Set<com.flowalp.event.entity.ManagerActivityUserAssociation> managerActivityUserAssociations) {
-        this.managerActivityUserAssociations = managerActivityUserAssociations;
-    }
-
-    public Set<com.flowalp.event.entity.TagActivityAssociation> getTagActivityAssociations() {
-        return tagActivityAssociations;
-    }
-
-    public void setTagActivityAssociations(Set<com.flowalp.event.entity.TagActivityAssociation> tagActivityAssociations) {
-        this.tagActivityAssociations = tagActivityAssociations;
     }
 
 }

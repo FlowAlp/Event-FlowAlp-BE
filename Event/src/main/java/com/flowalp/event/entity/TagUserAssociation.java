@@ -3,19 +3,20 @@ package com.flowalp.event.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "tag_user_association")
+@Table(name = "tag_user_association", schema = "event_flowalp")
 public class TagUserAssociation {
     @Id
-    @Column(name = "uuid", nullable = false, length = 36)
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)")
     private String uuid;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tag_uuid", nullable = false)
-    private com.flowalp.event.entity.Tag tagUuid;
+    private Tag tagUuid;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_uuid", nullable = false)
-    private com.flowalp.event.entity.User userUuid;
+    private User userUuid;
 
     public String getUuid() {
         return uuid;
@@ -25,19 +26,19 @@ public class TagUserAssociation {
         this.uuid = uuid;
     }
 
-    public com.flowalp.event.entity.Tag getTagUuid() {
+    public Tag getTagUuid() {
         return tagUuid;
     }
 
-    public void setTagUuid(com.flowalp.event.entity.Tag tagUuid) {
+    public void setTagUuid(Tag tagUuid) {
         this.tagUuid = tagUuid;
     }
 
-    public com.flowalp.event.entity.User getUserUuid() {
+    public User getUserUuid() {
         return userUuid;
     }
 
-    public void setUserUuid(com.flowalp.event.entity.User userUuid) {
+    public void setUserUuid(User userUuid) {
         this.userUuid = userUuid;
     }
 

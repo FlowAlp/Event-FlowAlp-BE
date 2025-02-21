@@ -1,32 +1,40 @@
 package com.flowalp.event.entity;
 
+import com.flowalp.event.entity.enums.Status;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
 
+@Setter
+@Getter
 @Entity
-@Table(name = "assignment_user_association")
+@Table(name = "assignment_user_association", schema = "event_flowalp")
 public class AssignmentUserAssociation {
     @Id
-    @Column(name = "uuid", nullable = false, length = 36)
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)")
     private String uuid;
+
+
+    @Column(name = "secure_id", columnDefinition = "CHAR(8)")
+    private String secureId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "assignment_uuid", nullable = false)
-    private com.flowalp.event.entity.Assignment assignmentUuid;
+    private Assignment assignmentUuid;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_uuid", nullable = false)
-    private com.flowalp.event.entity.User userUuid;
+    private User userUuid;
 
-    @Lob
     @Column(name = "comment")
     private String comment;
 
-    @Lob
     @Column(name = "status", nullable = false)
-    private String status;
+    private Status status;
 
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "created_at")
@@ -35,61 +43,5 @@ public class AssignmentUserAssociation {
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "updated_at")
     private Instant updatedAt;
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
-
-    public com.flowalp.event.entity.Assignment getAssignmentUuid() {
-        return assignmentUuid;
-    }
-
-    public void setAssignmentUuid(com.flowalp.event.entity.Assignment assignmentUuid) {
-        this.assignmentUuid = assignmentUuid;
-    }
-
-    public com.flowalp.event.entity.User getUserUuid() {
-        return userUuid;
-    }
-
-    public void setUserUuid(com.flowalp.event.entity.User userUuid) {
-        this.userUuid = userUuid;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Instant getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Instant updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 
 }

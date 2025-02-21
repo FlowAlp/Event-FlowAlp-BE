@@ -3,21 +3,21 @@ package com.flowalp.event.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "field_user_association")
+@Table(name = "field_user_association", schema = "event_flowalp")
 public class FieldUserAssociation {
     @Id
-    @Column(name = "uuid", nullable = false, length = 36)
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)")
     private String uuid;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_uuid", nullable = false)
-    private com.flowalp.event.entity.User userUuid;
+    private User userUuid;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "field_uuid", nullable = false)
-    private com.flowalp.event.entity.UserField fieldUuid;
+    private UserField fieldUuid;
 
-    @Lob
     @Column(name = "value", nullable = false)
     private String value;
 
@@ -29,19 +29,19 @@ public class FieldUserAssociation {
         this.uuid = uuid;
     }
 
-    public com.flowalp.event.entity.User getUserUuid() {
+    public User getUserUuid() {
         return userUuid;
     }
 
-    public void setUserUuid(com.flowalp.event.entity.User userUuid) {
+    public void setUserUuid(User userUuid) {
         this.userUuid = userUuid;
     }
 
-    public com.flowalp.event.entity.UserField getFieldUuid() {
+    public UserField getFieldUuid() {
         return fieldUuid;
     }
 
-    public void setFieldUuid(com.flowalp.event.entity.UserField fieldUuid) {
+    public void setFieldUuid(UserField fieldUuid) {
         this.fieldUuid = fieldUuid;
     }
 

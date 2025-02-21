@@ -2,14 +2,12 @@ package com.flowalp.event.entity;
 
 import jakarta.persistence.*;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 @Entity
-@Table(name = "user_fields")
+@Table(name = "user_fields", schema = "event_flowalp")
 public class UserField {
     @Id
-    @Column(name = "uuid", nullable = false, length = 36)
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)")
     private String uuid;
 
     @Column(name = "name", nullable = false)
@@ -17,12 +15,6 @@ public class UserField {
 
     @Column(name = "field_type", nullable = false, length = 50)
     private String fieldType;
-
-    @OneToMany(mappedBy = "fieldUuid")
-    private Set<com.flowalp.event.entity.EventUserFieldAssociation> eventUserFieldAssociations = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "fieldUuid")
-    private Set<com.flowalp.event.entity.FieldUserAssociation> fieldUserAssociations = new LinkedHashSet<>();
 
     public String getUuid() {
         return uuid;
@@ -46,22 +38,6 @@ public class UserField {
 
     public void setFieldType(String fieldType) {
         this.fieldType = fieldType;
-    }
-
-    public Set<com.flowalp.event.entity.EventUserFieldAssociation> getEventUserFieldAssociations() {
-        return eventUserFieldAssociations;
-    }
-
-    public void setEventUserFieldAssociations(Set<com.flowalp.event.entity.EventUserFieldAssociation> eventUserFieldAssociations) {
-        this.eventUserFieldAssociations = eventUserFieldAssociations;
-    }
-
-    public Set<com.flowalp.event.entity.FieldUserAssociation> getFieldUserAssociations() {
-        return fieldUserAssociations;
-    }
-
-    public void setFieldUserAssociations(Set<com.flowalp.event.entity.FieldUserAssociation> fieldUserAssociations) {
-        this.fieldUserAssociations = fieldUserAssociations;
     }
 
 }
