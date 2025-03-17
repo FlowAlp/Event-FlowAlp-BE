@@ -18,6 +18,13 @@ module Event {
     opens com.flowalp.event.controller;
 
     exports com.flowalp.event.entity;
+    exports com.flowalp.event.mapper;
+    exports com.flowalp.event.dto;
+    exports com.flowalp.event.service;
+    exports com.flowalp.event.controller;
+    exports com.flowalp.event.repository;
+    exports com.flowalp.event.exception;
+    exports com.flowalp.event.util;
 
     exports com.flowalp.event;
 }
