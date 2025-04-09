@@ -1,0 +1,70 @@
+spring:
+  profiles:
+    active: dev
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  application:
+    name: event
+    version: 0.0.1
+  secret:
+    -----BEGIN PRIVATE KEY-----
+    MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDDZHpHtGKPrqlP
+    K5pzyD1bSsAdU3KkUVyPC1Nd8dE9ZNjuu7rhAQ/VEB1bDj9eJHDVcKiosvk9p+J9
+    L8Ggtu4vqubLZl3GQpe5/I1sx8CEotrCUAG+d9jeleOFN8anCnghyRKkCtEL4X7F
+    cXyGJHuAD/CV0dViyXlB5heXO9tyQpN7qnpCLcsd8RHmlNoPm5Pmpabv9Hrdir+c
+    Nm5tUGK5fTk1dcMI97Hz/V5+aIcsKflU93AeJn5WVJ2k/O6XUIQGCm/tmqoisR4A
+    kLZjhH4sxsdzAffv1MFJ74BVC/Hf6NgBDuyOBVMYLmEduY1cQGEGTTLDEVpyuMwD
+    L71uj2nhAgMBAAECggEADG6d1KbisAlxEp1fvw7uL3s0uND0zgVyvhO+hs9SbMV4
+    Q41cjUEx6pCzS3Y/PCxVpRD9XDmCAAUo9SXnHCSTiGMneujdHdaiHIZ4EaQuiMnr
+    YRpx1/Z8bSIsly72s+1nuh+W8OrSxP6goCuxvH/A/2OUP1YZ7YaL8XBUTy4y7uS2
+    r5+YdUDMrKECtGg4EGfDO0wsZKnC+WGJyGkBM6p4n+DcWpsuMlaY4WWA75fimSTu
+    NIuh3qgpbaHxPbH5OSGBt0yPsQpEsYTa+EgQ3QgXNLELmdY0/hIuYHshgWRDixHS
+    Je1lPJRG4wegZyfQg4wiHiruEawvM2s6skF/T2gSKQKBgQD27caKa9NXA3PIHIsb
+    BVOZAN/xMWxNZTdm/i62hQ1C/7UcwoWFvuSBO3bSOjPZKsysikRyMNHHLKZJvZmp
+    3YwVW/opQQBzYQtMfEND7URO4PL9R/8zSKZg+7YhHz24B8iRJcBtKFnEvXpEkJ8t
+    EzS9ZRoc+SmmiGNJx6zyX2gJaQKBgQDKkghOmzVqRwDNOnnSCJiIxb8ZN9uEek/5
+    j78RjZ7dfgBdAWXtEDG8MKurjDkG3pdk93bmu8rv8sfh72bVkVVxkcIP86TX8NUt
+    CYuq3EnLIcnfR2ymgeujSGI22crC4g6ZABAW7HMJ2ZgFU9FkjYz7x2IFSnAvxNPN
+    RUiS0GMVuQKBgQCSdBhrhORGGYAUUgmXLyOT/dbUoPGRPdUMOvnNu0BQWoU614yF
+    9OBmXbRtn6OczCu0shVCfP4O2caOuetnukUZbgIDcdAonogrBxCGOzVmazjzTD5q
+    Vk6H+wLcxkC+467rl653j5UegRsBi509CMUhB9PjF0zCvuXUnp9O6ZM08QKBgG3W
+    FrkAgUr56t5cmZcf4A0xI7f5yIYhh+GqZpCO+JfibTIAwxJyWHVQ8pRWuMkXwoEV
+    iRv8sUG/o0/HbjvYzLqCrPXXRwdrZzs/VMK1JTIGRR5S7P+vrGPhqJdTKhTXW9Dr
+    7s1vMcUifcJNu1jJQ6t1ZZm2zfOoxqsjqQEqCr/JAoGAVUo7jGPS+uBp8YwfmmRH
+    q5jN0nGbXetPL+Ol9DWDtgduhx8u2ieNY4HVFwXx18eTgQkas+5cnpDHMf2EEc67
+    gLs0d3ZiwEF5ShqbAliSXioGtuBc76X2QhWnd1oXUwsBfnMzc4bjq8htDDgobU7e
+    Zk2EPWm1/oiioaE8MgkGXsI=
+    -----END PRIVATE KEY-----
+  datasource:
+    url: jdbc:mysql://localhost:3306/event_flowalp?useSSL=false&allowPublicKeyRetrieval=true
+    username: nuovo_utente
+    password: tua_password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update  # In dev potresti usare "update"
+server:
+  port: 3000
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  secret:
+    key: YOUR_PROD_SECRET_KEY  # Secret key per il profilo prod
+  datasource:
+    url: jdbc:mysql://localhost:3306/event_flowalp?useSSL=false&allowPublicKeyRetrieval=true
+    username: nuovo_utente
+    password: tua_password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate  # In prod solitamente si usa "validate"
+  servlet:
+    multipart:
+        enabled: true
+server:
+  port: 3000
