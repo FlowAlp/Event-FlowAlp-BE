@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EventUserFieldAssociationRepository extends JpaRepository<EventUserFieldAssociation, String> {
+
 }
