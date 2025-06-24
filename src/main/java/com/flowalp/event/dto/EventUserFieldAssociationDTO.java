@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TagDTO {
+public class EventUserFieldAssociationDTO {
 
   private String id;
-  private String name;
-  private String description;
-  private String color;
+  private EventDTO event;
+  private UserFieldsDTO userField;
+  private Boolean required;
 }

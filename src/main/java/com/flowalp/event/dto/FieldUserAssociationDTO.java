@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TagDTO {
+public class FieldUserAssociationDTO {
 
   private String id;
-  private String name;
-  private String description;
-  private String color;
+  private UserDTO user;
+  private UserFieldsDTO userField;
+  private String value;
 }

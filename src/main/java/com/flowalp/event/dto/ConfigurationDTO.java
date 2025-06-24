@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TagDTO {
+public class ConfigurationDTO {
 
   private String id;
+  private EventDTO event;
   private String name;
-  private String description;
-  private String color;
+  private String value;
 }
