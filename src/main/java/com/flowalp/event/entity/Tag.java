@@ -1,54 +1,27 @@
 package com.flowalp.event.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Setter
+@Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "tag", schema = "event_flowalp")
 public class Tag {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)")
-    private String uuid;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+  @Id @GeneratedValue(strategy = GenerationType.UUID) @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)") private String id;
 
-    @Column(name = "description")
-    private String description;
+  @Column(name = "name", nullable = false) private String name;
 
-    @Column(name = "color", nullable = false, length = 7)
-    private String color;
+  @Column(name = "description") private String description;
 
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
+  @Column(name = "color", nullable = false, length = 7) private String color;
 }
