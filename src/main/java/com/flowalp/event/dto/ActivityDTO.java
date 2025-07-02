@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 public class ActivityDTO {
 
   private String id;
-  private String secureId;
   private EventDTO event;
   private String name;
   private String description;

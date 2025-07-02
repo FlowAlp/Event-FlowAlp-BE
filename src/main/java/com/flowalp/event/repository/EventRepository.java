@@ -7,5 +7,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EventRepository extends JpaRepository<Event, String> {
 
-  Event findBySecureId(String secureId);
 }

@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 public class EventDTO {
 
   private String id;
-  private String secureId;
   private String name;
   private String description;
   private String imageUrl;

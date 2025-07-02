@@ -1,5 +1,6 @@
 package com.flowalp.event.entity;
 
+import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
 import com.flowalp.event.entity.enums.AssigmentPeriod;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,9 +25,11 @@ import lombok.Setter;
 @Table(name = "assignment", schema = "event_flowalp")
 public class Assignment {
 
-  @Id @GeneratedValue(strategy = GenerationType.UUID) @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)") private String id = UUID.randomUUID().toString();
-
-  @Column(name = "secure_id", columnDefinition = "CHAR(8)") private String secureId;
+  @Id
+  @Column(name = "uuid", length = 8, nullable = false, updatable = false)
+  private String id = NanoIdUtils.randomNanoId(
+      NanoIdUtils.DEFAULT_NUMBER_GENERATOR,
+      NanoIdUtils.DEFAULT_ALPHABET, 8);
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false) @JoinColumn(name = "activity_uuid", nullable = false) private Activity activity;
 

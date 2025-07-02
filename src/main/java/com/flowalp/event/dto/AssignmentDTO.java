@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 public class AssignmentDTO {
 
   private String id;
-  private String secureId;
   private ActivityDTO activity;
   private String name;
   private String description;

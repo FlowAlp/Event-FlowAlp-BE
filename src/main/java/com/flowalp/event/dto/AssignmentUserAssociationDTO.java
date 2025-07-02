@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 public class AssignmentUserAssociationDTO {
 
   private String id;
-  private String secureId;
   private AssignmentDTO assignment;
   private UserDTO user;
   private String comment;
