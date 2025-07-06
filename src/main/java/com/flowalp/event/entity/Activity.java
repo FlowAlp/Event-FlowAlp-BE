@@ -1,10 +1,9 @@
 package com.flowalp.event.entity;
 
+import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -23,9 +22,11 @@ import org.hibernate.annotations.ColumnDefault;
 @Table(name = "activity", schema = "event_flowalp")
 public class Activity {
 
-  @Id @GeneratedValue(strategy = GenerationType.UUID) @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)") private String id;
-
-  @Column(name = "secure_id", columnDefinition = "CHAR(8)") private String secureId;
+  @Id
+  @Column(name = "uuid", length = 8, nullable = false, updatable = false)
+  private String id = NanoIdUtils.randomNanoId(
+      NanoIdUtils.DEFAULT_NUMBER_GENERATOR,
+      NanoIdUtils.DEFAULT_ALPHABET, 8);
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false) @JoinColumn(name = "event_uuid", nullable = false) private Event event;
 

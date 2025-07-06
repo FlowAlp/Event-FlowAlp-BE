@@ -1,6 +1,6 @@
 package com.flowalp.event.entity;
 
-import com.flowalp.event.entity.enums.UserRole;
+import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,17 +19,19 @@ import lombok.Setter;
 @Table(name = "user", schema = "event_flowalp")
 public class User {
 
-  @Id @GeneratedValue(strategy = GenerationType.UUID) @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)") private String id;
+  @Id
+  @Column(name = "uuid", length = 8, nullable = false, updatable = false)
+  private String id = NanoIdUtils.randomNanoId(
+      NanoIdUtils.DEFAULT_NUMBER_GENERATOR,
+      NanoIdUtils.DEFAULT_ALPHABET, 8);
 
-  @Column(name = "secure_id", columnDefinition = "CHAR(8)") private String secureId;
+  @Column(name = "keycloak_id", nullable = false, unique = true) private String keycloakId;
 
   @Column(name = "name", nullable = false) private String name;
 
   @Column(name = "last_name", nullable = false) private String lastName;
 
   @Column(name = "birth_date", nullable = false) private LocalDate birthDate;
-
-  @Column(name = "role", nullable = false) private UserRole role;
 
   @Column(name = "parent_uuid", columnDefinition = "CHAR(36)") private String parentId;
 }
