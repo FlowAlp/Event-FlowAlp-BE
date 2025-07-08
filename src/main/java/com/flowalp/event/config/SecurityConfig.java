@@ -7,50 +7,37 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-@EnableMethodSecurity
-@Profile("!local")
+@EnableWebSecurity
 public class SecurityConfig {
 
-  private static final String SWAGGER_UI = "/swagger-ui";
-  private static final String API_DOCS = "/api-docs";
-  private static final String API_V_1_GET_VERSION = "/api/v1/version";
-  private static final String API_V_1_PUBLIC_OFFERS = "/api/v1/public/offers";
-  private static final String AUTH_LOGIN = "/auth/login";
-  private static final String AUTH_REFRESH_TOKEN = "/auth/refresh-token";
-  private static final String AUTH_LOGOUT = "/auth/logout";
-
   @Bean
-  public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
-
-    // Allow swagger and public endpoints
-    allowSwaggerAndPublicEndPoint(http);
-
-    // Apply JWT token validation
-    http.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
-
-    // Ensure any request requires authentication
-    http.authorizeHttpRequests(requests -> requests.requestMatchers(HttpMethod.GET, AUTH_LOGIN).permitAll().requestMatchers(HttpMethod.POST, AUTH_LOGOUT).authenticated()
-        .requestMatchers(HttpMethod.POST, AUTH_REFRESH_TOKEN).permitAll().anyRequest().authenticated() // This should be the last call in the chain
-    );
-
+  SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    http
+        .csrf(AbstractHttpConfigurer::disable)
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers("/actuator/**", "/public/**").permitAll()
+            .anyRequest().authenticated())
+        .oauth2ResourceServer(oauth2 -> oauth2
+            .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthConverter())));
     return http.build();
   }
 
-  @Bean
-  public RestTemplate restTemplate() {
-    return new RestTemplate();
-  }
+  private JwtAuthenticationConverter jwtAuthConverter() {
+    JwtGrantedAuthoritiesConverter roles = new JwtGrantedAuthoritiesConverter();
+    roles.setAuthorityPrefix("ROLE_");
+    roles.setAuthoritiesClaimName("realm_access.roles");
 
-  private void allowSwaggerAndPublicEndPoint(final HttpSecurity httpSecurity) throws Exception {
-    httpSecurity.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(
-        requests -> requests.requestMatchers(HttpMethod.GET, SWAGGER_UI + "/**").permitAll().requestMatchers(HttpMethod.GET, API_V_1_GET_VERSION + "/**").permitAll()
-            .requestMatchers(HttpMethod.GET, API_V_1_PUBLIC_OFFERS + "/**").permitAll().requestMatchers(HttpMethod.POST, API_V_1_PUBLIC_OFFERS + "/**").permitAll()
-            .requestMatchers(HttpMethod.POST, AUTH_LOGIN).permitAll().requestMatchers(HttpMethod.POST, AUTH_REFRESH_TOKEN).permitAll().requestMatchers(HttpMethod.GET, API_DOCS + "/**")
-            .permitAll());
+    JwtAuthenticationConverter conv = new JwtAuthenticationConverter();
+    conv.setJwtGrantedAuthoritiesConverter(roles);
+    return conv;
   }
 }
+

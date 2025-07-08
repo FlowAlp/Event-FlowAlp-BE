@@ -27,6 +27,7 @@ public class EventController {
 
   @GetMapping(EVENT + "/get/{secureId}")
   public ResponseEntity<EventDTO> getEvent(@PathVariable String secureId) {
-    return ResponseEntity.ok(eventService.getEvent(secureId));
+    return null;
+    //return ResponseEntity.ok(eventService.getEvent(secureId));
   }
 }
