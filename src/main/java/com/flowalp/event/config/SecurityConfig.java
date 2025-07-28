@@ -22,9 +22,17 @@ public class SecurityConfig {
   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
         .csrf(AbstractHttpConfigurer::disable)
+
+        // 🔑 lascia passare i CORS handler definiti da CorsFilter
+        .cors(Customizer.withDefaults())
+
         .authorizeHttpRequests(auth -> auth
+            // consenti i pre-flight di qualsiasi path
+            .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+            // le tue eccezioni
             .requestMatchers("/actuator/**", "/public/**").permitAll()
             .anyRequest().authenticated())
+
         .oauth2ResourceServer(oauth2 -> oauth2
             .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthConverter())));
     return http.build();

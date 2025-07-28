@@ -3,12 +3,12 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${KEYCLOAK_ISSUER_URI:https://accounts.flowalp.com/realms/flowalp}
+          issuer-uri: "https://accounts.flowalp.com/realms/flowalp"
   datasource:
-    url: ${HIKARI_JDBC_URL:jdbc:mysql://localhost:3306/event_flowalp?useSSL=false&allowPublicKeyRetrieval=true}
-    driver-class-name: ${HIKARI_DRIVER_CLASS_NAME:com.mysql.cj.jdbc.Driver}
-    username: ${HIKARI_USERNAME:root}
-    password: ${HIKARI_PASSWORD:Admin123}
+    url: "jdbc:mysql://localhost:3306/event_flowalp?useSSL=false&allowPublicKeyRetrieval=true"
+    driver-class-name: "com.mysql.cj.jdbc.Driver"
+    username: "root"
+    password: "Admin123"
   jpa:
     hibernate:
       ddl-auto: update
@@ -17,7 +17,7 @@ api:
   url: /api/v1
 
 cors:
-  allowed-origins: ${ALLOWED_CORS_ORIGIN:http://localhost:4200}
+  allowed-origins: "http://localhost:4200"
 
 server:
   port: 3000
