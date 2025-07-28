@@ -20,5 +20,4 @@ public class EventService {
     var event = eventRepository.save(modelMapper.map(eventDTO, Event.class));
     return modelMapper.map(event, EventDTO.class);
   }
-
 }
