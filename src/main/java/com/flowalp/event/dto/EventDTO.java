@@ -16,9 +16,6 @@ public class EventDTO {
   private String name;
   private String description;
   private String imageUrl;
-  private String colorPrimary;
-  private String colorSecondary;
-  private String colorAccent;
   private Instant createdAt;
   private Instant updatedAt;
 }
