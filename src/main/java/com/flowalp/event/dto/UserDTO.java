@@ -1,6 +1,5 @@
 package com.flowalp.event.dto;
 
-import com.flowalp.event.entity.enums.UserRole;
 import java.time.LocalDate;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -18,7 +17,6 @@ public class UserDTO {
   private String name;
   private String lastName;
   private LocalDate birthDate;
-  private UserRole role;
   private String parentId;
   private List<TagDTO> tags;
 }
