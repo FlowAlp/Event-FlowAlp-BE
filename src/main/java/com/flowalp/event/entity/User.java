@@ -33,5 +33,5 @@ public class User {
 
   @Column(name = "birth_date", nullable = false) private LocalDate birthDate;
 
-  @Column(name = "parent_uuid", columnDefinition = "CHAR(36)") private String parentId;
+  @Column(name = "parent_uuid", length = 8) private String parentId;
 }
