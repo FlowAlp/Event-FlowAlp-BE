@@ -22,21 +22,19 @@ public class SecurityConfig {
   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
         .csrf(AbstractHttpConfigurer::disable)
-
-        // 🔑 lascia passare i CORS handler definiti da CorsFilter
         .cors(Customizer.withDefaults())
-
         .authorizeHttpRequests(auth -> auth
-            // consenti i pre-flight di qualsiasi path
+            // mantieni il CORS e le eccezioni che vuoi sempre aperte
             .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-            // le tue eccezioni
             .requestMatchers("/actuator/**", "/public/**").permitAll()
-            .anyRequest().authenticated())
-
+            // **IMPORTANTE**: qui apri tutto e usi le annotazioni sui controller
+            .anyRequest().permitAll()
+        )
         .oauth2ResourceServer(oauth2 -> oauth2
             .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthConverter())));
     return http.build();
   }
+
 
   private JwtAuthenticationConverter jwtAuthConverter() {
     JwtGrantedAuthoritiesConverter roles = new JwtGrantedAuthoritiesConverter();

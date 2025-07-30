@@ -20,7 +20,7 @@ import lombok.Setter;
 @Table(name = "tag_activity_association", schema = "event_flowalp")
 public class TagActivityAssociation {
 
-  @Id @GeneratedValue(strategy = GenerationType.UUID) @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)") private String id;
+  @Id @GeneratedValue(strategy = GenerationType.UUID) @Column(name = "uuid", nullable = false, length = 8) private String id;
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false) @JoinColumn(name = "tag_uuid", nullable = false) private Tag tag;
 

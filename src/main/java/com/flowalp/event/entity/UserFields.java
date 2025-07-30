@@ -17,7 +17,9 @@ import lombok.Setter;
 @Table(name = "user_fields", schema = "event_flowalp")
 public class UserFields {
 
-  @Id @GeneratedValue(strategy = GenerationType.UUID) @Column(name = "uuid", nullable = false, columnDefinition = "CHAR(36)") private String id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.UUID)
+  @Column(name = "uuid", nullable = false, length = 8) private String id;
 
   @Column(name = "name", nullable = false) private String name;
 

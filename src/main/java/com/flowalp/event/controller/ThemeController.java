@@ -1,7 +1,7 @@
 package com.flowalp.event.controller;
 
-import com.flowalp.event.dto.EventColorDTO;
-import com.flowalp.event.service.EventColorService;
+import com.flowalp.event.dto.ThemeDTO;
+import com.flowalp.event.service.ThemeService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("${api.url}")
-public class EventColorController {
+public class ThemeController {
 
-  private final EventColorService eventColorService;
-  private static final String EVENT_COLOR = "event-color";
+  private final ThemeService themeService;
+  private static final String THEME = "theme";
 
-  @GetMapping(EVENT_COLOR + "/get-all-by-event/{eventId}")
-  public ResponseEntity<List<EventColorDTO>> getColorByEvent(@PathVariable String eventId) {
-    return new ResponseEntity<>(eventColorService.findAllByEvent(eventId), HttpStatus.OK);
+  @GetMapping(THEME + "/get-all-by-event/{eventId}")
+  public ResponseEntity<List<ThemeDTO>> getColorByEvent(@PathVariable String eventId) {
+    return new ResponseEntity<>(themeService.findAllByEvent(eventId), HttpStatus.OK);
   }
 }
